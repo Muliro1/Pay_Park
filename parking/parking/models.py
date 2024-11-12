@@ -37,3 +37,15 @@ class Floor(models.Model):
 
     def __str__(self):
         return f"Floor {self.floor_number} in Block {self.block.block_code}"
+
+class ParkingSlot(models.Model):
+    id = models.AutoField(primary_key=True)
+    floor = models.ForeignKey(Floor, on_delete=models.CASCADE, related_name='parking_slots')
+    slot_number = models.IntegerField()
+    is_occupied = models.BooleanField(default=False)
+    is_reserved = models.BooleanField(default=False)
+    is_handicapped_accessible = models.BooleanField(default=False)
+    vehicle_type = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"Slot {self.slot_number} on Floor {self.floor.floor_number} in Block {self.floor.block.block_code}"
