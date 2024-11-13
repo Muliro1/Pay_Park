@@ -1,4 +1,6 @@
 from django.db import models
+from customers.models import Customer  # Import the Customer model
+from parking.models import ParkingSlot  # Import the ParkingSlot model
 
 # Create your models here.
 class ParkingReservation(models.Model):
