@@ -11,6 +11,12 @@ class Customer(models.Model):
     contact_number = models.CharField(max_length=15, null=True, blank=True)
 
     def __str__(self):
+        """
+        Returns a string representation of the customer.
+
+        :return: A string representation of the customer.
+        :rtype: str
+        """
         return self.vehicle_number
 
 class RegularPass(models.Model):
@@ -22,4 +28,10 @@ class RegularPass(models.Model):
     cost = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
+        """
+        Returns a string representation of the regular pass.
+
+        :return: A string representation of the regular pass.
+        :rtype: str
+        """
         return f"Pass for {self.customer.vehicle_number} starting on {self.start_date}"

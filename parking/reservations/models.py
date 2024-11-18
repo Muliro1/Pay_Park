@@ -12,6 +12,13 @@ class ParkingReservation(models.Model):
     parking_slot = models.ForeignKey(ParkingSlot, on_delete=models.CASCADE)
 
     def __str__(self):
+        """
+        Returns a string representation of the reservation in the format
+        "Reservation for <vehicle_number> on <start_timestamp>".
+
+        :return: A string representation of the reservation.
+        :rtype: str
+        """
         return f"Reservation for {self.customer.vehicle_number} on {self.start_timestamp}"
 
 class ParkingSlip(models.Model):
@@ -23,5 +30,13 @@ class ParkingSlip(models.Model):
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
+        """
+        Returns a string representation of the parking slip in the format
+        "Slip for reservation <reservation_id> issued on <issue_date>".
+
+        :return: A string representation of the parking slip.
+        :rtype: str
+        """
+        
         return f"Slip for reservation {self.reservation.id} issued on {self.issue_date}"
 
