@@ -4,6 +4,8 @@ from .authentication import CustomUserBackend
 from .forms import RegisterForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.views import View
 
 def register(request):
     if request.method == 'POST':
