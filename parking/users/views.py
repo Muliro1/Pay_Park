@@ -23,17 +23,21 @@ def register(request):
 
 def login_view(request):
     error_message = None
-    # Login view implementation
     form = LoginForm(request.POST or None)
     if request.method == 'POST':
-        username = request.POST.get['username']
-        password = request.POST.get['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            next_url = request.POST.get('next') or request.GET.get('next') or 'home'  
-            return redirect('next_url')
-    return render(request, 'users/login.html', {'error': error_message})
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if username and password:
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                next_url = request.POST.get('next') or request.GET.get('next') or 'home'
+                return redirect(next_url)
+            else:
+                error_message = 'Invalid username or password'
+        else:
+            error_message = 'Please enter both username and password'
+    return render(request, 'users/login.html', {'form': form, 'error': error_message})
 
 def logout_view(request):
     if request.method == "POST":
