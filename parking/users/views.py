@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
+from django.contrib.auth import authenticate
 
 def register(request):
     if request.method == 'POST':
@@ -48,7 +49,7 @@ def logout_view(request):
 
 @login_required
 def home_view(request):
-    return render(request, 'auth1_app/home.html')
+    return render(request, 'users/home.html')
 
 class ProtectedView(LoginRequiredMixin, View):
     login_url = '/login/'
