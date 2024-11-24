@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .authentication import CustomUserBackend
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -15,7 +15,7 @@ def register(request):
             password = form.cleaned_data['password']
             user = User.objects.create_user(username=username, password=password)
             login(request, user)
-            return redirect('home')
+            return redirect('login')
     
     else:
         form = RegisterForm()
@@ -24,6 +24,7 @@ def register(request):
 def login_view(request):
     error_message = None
     # Login view implementation
+    form = LoginForm(request.POST or None)
     if request.method == 'POST':
         username = request.POST.get['username']
         password = request.POST.get['password']
@@ -32,7 +33,7 @@ def login_view(request):
             login(request, user)
             next_url = request.POST.get('next') or request.GET.get('next') or 'home'  
             return redirect('next_url')
-    return render(request, 'login.html', {'error': error_message})
+    return render(request, 'users/login.html', {'error': error_message})
 
 def logout_view(request):
     if request.method == "POST":
