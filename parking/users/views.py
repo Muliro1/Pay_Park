@@ -50,6 +50,9 @@ def logout_view(request):
 @login_required
 def home_view(request):
     return render(request, 'users/home.html')
+@login_required
+def reserve_parking(request):
+    return render(request, 'users/reserve_parking.html')
 
 class ProtectedView(LoginRequiredMixin, View):
     login_url = '/login/'
