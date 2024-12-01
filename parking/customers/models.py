@@ -8,7 +8,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, null=True, blank=True)
     id = models.AutoField(primary_key=True)
     vehicle_number = models.CharField(max_length=20)
-    registration_date = models.DateField()
+    registration_date = models.DateField(null=True, blank=True)
     is_regular_customer = models.BooleanField(default=False)
     contact_number = models.CharField(max_length=15, null=True, blank=True)
 

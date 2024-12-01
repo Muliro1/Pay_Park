@@ -7,8 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth import authenticate
-from .models import User
 from customers.models import Customer
+from django.utils import timezone
 
 
 def register(request):
@@ -19,7 +19,7 @@ def register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             user = User.objects.create_user(username=username, password=password, email=email)
-            Customer.objects.create(user=user)
+            Customer.objects.create(user=user, vehicle_number='', registration_date=timezone.now(), is_regular_customer=False, contact_number='')
             login(request, user)
             return redirect('login')
     
