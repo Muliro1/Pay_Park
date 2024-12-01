@@ -16,9 +16,10 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
             password = form.cleaned_data['password']
-            user = User.objects.create_user(username=username, password=password)
-            Customer.objects.create(user=user, vehicle_number='', registration_date='2023-01-01', is_regular_customer=False, contact_number='')
+            user = User.objects.create_user(username=username, password=password, email=email)
+            Customer.objects.create(user=user)
             login(request, user)
             return redirect('login')
     
