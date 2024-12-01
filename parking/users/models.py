@@ -18,7 +18,7 @@ class User(AbstractUser, PermissionsMixin):
     age = models.PositiveIntegerField(null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=False)
     password = models.CharField(max_length=255)
 
     def __str__(self):

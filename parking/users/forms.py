@@ -8,7 +8,7 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields  = ['username', 'password', 'password_confirm']
+        fields  = ['username', 'email', 'password', 'password_confirm']
     
     def clean(self):
         cleaned_data = super().clean()
@@ -17,6 +17,9 @@ class RegisterForm(forms.ModelForm):
         # Check if the passwords match
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError("Passwords do not match!")
+        email = cleaned_data.get('email')
+        if email and User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Email already exists!")
         return cleaned_data
     
 class LoginForm(forms.ModelForm):

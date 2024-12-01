@@ -7,6 +7,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth import authenticate
+from .models import User
+from customers.models import Customer
+
 
 def register(request):
     if request.method == 'POST':
@@ -15,6 +18,7 @@ def register(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = User.objects.create_user(username=username, password=password)
+            Customer.objects.create(user=user, vehicle_number='', registration_date='2023-01-01', is_regular_customer=False, contact_number='')
             login(request, user)
             return redirect('login')
     
