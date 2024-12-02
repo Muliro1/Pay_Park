@@ -7,8 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.contrib.auth import authenticate
-from customers.models import Customer
 from django.utils import timezone
+from .forms import ReserveParkingForm
+from .models import ParkingReservation, ParkingSlip
+from parking.models import ParkingSlot
+from customers.models import Customer
 
 
 def register(request):

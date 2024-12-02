@@ -38,8 +38,20 @@ class LoginForm(forms.ModelForm):
         return cleaned_data
 
 class ReserveParkingForm(forms.Form):
-    vehicle_number = forms.CharField(max_length=20)
-    registration_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    is_regular_customer = forms.BooleanField(required=False)
-    contact_number = forms.CharField(max_length=20)
+    start_timestamp = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
+    duration_in_minutes = forms.IntegerField()
+    booking_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+    def clean(self):
+        cleaned_data = super().clean()
+        start_timestamp = cleaned_data.get('start_timestamp')
+        duration_in_minutes = cleaned_data.get('duration_in_minutes')
+        booking_date = cleaned_data.get('booking_date')
+
+        if start_timestamp and duration_in_minutes:
+            end_timestamp = start_timestamp + timedelta(minutes=duration_in_minutes)
+            if end_timestamp < timezone.now():
+                raise ValidationError("The reservation end time must be in the future.")
+
+        return cleaned_data
     
