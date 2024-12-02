@@ -52,7 +52,7 @@ class ReserveParkingForm(forms.Form):
     duration_in_minutes = forms.IntegerField()
     booking_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     parking_slot = forms.ModelChoiceField(queryset=ParkingSlot.objects.all())
-    parking_lot = forms.ModelChoiceField(queryset=ParkingLot.objects.all(), disabled=True)
+    parking_lot = forms.ModelChoiceField(queryset=ParkingLot.objects.all())
 
 
     def clean(self):

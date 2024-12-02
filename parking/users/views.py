@@ -76,12 +76,12 @@ def reserve_parking(request):
                 duration_in_minutes=duration_in_minutes,
                 booking_date=booking_date,
                 parking_slot=parking_slot,
-                parking_lot=parking_lot
+                #parking_lot=parking_lot
             )
             slip_number = f"SLIP-{reservation.id}"
             ParkingSlip.objects.create(
                 reservation=reservation,
-                slip_number=slip_number
+                #slip_number=slip_number
             )
             return redirect('reserve_parking')
     else:

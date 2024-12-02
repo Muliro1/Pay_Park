@@ -1,6 +1,7 @@
 from django.db import models
 from customers.models import Customer  # Import the Customer model
 from parking.models import ParkingSlot  # Import the ParkingSlot model
+from django.utils import timezone
 
 # Create your models here.
 class ParkingReservation(models.Model):
@@ -24,10 +25,10 @@ class ParkingReservation(models.Model):
 class ParkingSlip(models.Model):
     id = models.AutoField(primary_key=True)
     reservation = models.ForeignKey(ParkingReservation, on_delete=models.CASCADE)
-    issue_date = models.DateField()
-    entry_time = models.DateTimeField()
+    issue_date = models.DateField(default=timezone.now)
+    entry_time = models.DateTimeField(default=timezone.now)
     exit_time = models.DateTimeField(null=True, blank=True)
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    total_amount = models.DecimalField(default=0.0, max_digits=10, decimal_places=2)
 
     def __str__(self):
         """
