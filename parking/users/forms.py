@@ -37,3 +37,9 @@ class LoginForm(forms.ModelForm):
             raise forms.ValidationError("Invalid username or password.")
         return cleaned_data
 
+class ReserveParkingForm(forms.Form):
+    vehicle_number = forms.CharField(max_length=20)
+    registration_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    is_regular_customer = forms.BooleanField(required=False)
+    contact_number = forms.CharField(max_length=20)
+    

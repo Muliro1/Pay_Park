@@ -57,7 +57,31 @@ def home_view(request):
     return render(request, 'users/home.html')
 @login_required
 def reserve_parking(request):
-    return render(request, 'users/reserve_parking.html')
+    if request.method == 'POST':
+        form = ReserveParkingForm(request.POST)
+        if form.is_valid():
+            parking_slot = form.cleaned_data['parking_slot']
+            start_timestamp = form.cleaned_data['start_timestamp']
+            duration_in_minutes = form.cleaned_data['duration_in_minutes']
+            booking_date = form.cleaned_data['booking_date']
+            
+            # Create the ParkingReservation instance
+            reservation = ParkingReservation.objects.create(
+                customer=request.user.customer,
+                start_timestamp=start_timestamp,
+                duration_in_minutes=duration_in_minutes,
+                booking_date=booking_date,
+                parking_slot=parking_slot
+            )
+            slip_number = f"SLIP-{reservation.id}"
+            ParkingSlip.objects.create(
+                reservation=reservation,
+                slip_number=slip_number
+            )
+            return redirect('home')
+    else:
+        form = ReserveParkingForm()
+    return render(request, 'users/reserve_parking.html', {'form': form})
 
 class ProtectedView(LoginRequiredMixin, View):
     login_url = '/login/'
