@@ -24,6 +24,6 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('home/', home_view, name='home'),
-    path('reserve_parking/', home_view, name='reserve_parking'),
+    path('reserve_parking/', reserve_parking, name='reserve_parking'),
 
 ]

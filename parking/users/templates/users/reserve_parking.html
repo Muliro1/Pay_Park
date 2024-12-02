@@ -1,11 +1,13 @@
-<!-- templates/users/register.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>login</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Reserve</button>
-</form>
+<h2>Reserve Parking</h2>
+<div class="container">
+    <form method="POST" action="{% url 'reserve_parking' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Reserve</button>
+        <a href="{% url 'home' %}">Cancel</a>
+    </form>
+</div>
 {% endblock %}

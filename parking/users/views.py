@@ -9,7 +9,7 @@ from django.views import View
 from django.contrib.auth import authenticate
 from django.utils import timezone
 from .forms import ReserveParkingForm
-from .models import ParkingReservation, ParkingSlip
+from reservations.models import ParkingReservation, ParkingSlip
 from parking.models import ParkingSlot
 from customers.models import Customer
 
@@ -81,7 +81,7 @@ def reserve_parking(request):
                 reservation=reservation,
                 slip_number=slip_number
             )
-            return redirect('home')
+            return redirect('reserve_parking')
     else:
         form = ReserveParkingForm()
     return render(request, 'users/reserve_parking.html', {'form': form})
