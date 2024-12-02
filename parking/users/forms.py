@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.utils import timezone
+from datetime import timedelta
+from reservations.models import ParkingSlip
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -41,12 +44,15 @@ class ReserveParkingForm(forms.Form):
     start_timestamp = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
     duration_in_minutes = forms.IntegerField()
     booking_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    parking_slot = forms.ModelChoiceField(queryset=ParkingSlip.objects.all())
+
 
     def clean(self):
         cleaned_data = super().clean()
         start_timestamp = cleaned_data.get('start_timestamp')
         duration_in_minutes = cleaned_data.get('duration_in_minutes')
         booking_date = cleaned_data.get('booking_date')
+        
 
         if start_timestamp and duration_in_minutes:
             end_timestamp = start_timestamp + timedelta(minutes=duration_in_minutes)
