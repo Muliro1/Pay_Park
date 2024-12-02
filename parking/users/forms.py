@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils import timezone
 from datetime import timedelta
-from reservations.models import ParkingSlip
+from parking.models import ParkingLot, ParkingSlot
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -24,6 +24,13 @@ class RegisterForm(forms.ModelForm):
         if email and User.objects.filter(email=email).exists():
             raise forms.ValidationError("Email already exists!")
         return cleaned_data
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password'])
+        if commit:
+            user.save()
+        return user
+    
     
 class LoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -44,7 +51,8 @@ class ReserveParkingForm(forms.Form):
     start_timestamp = forms.DateTimeField(widget=forms.DateTimeInput(attrs={'type': 'datetime-local'}))
     duration_in_minutes = forms.IntegerField()
     booking_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
-    parking_slot = forms.ModelChoiceField(queryset=ParkingSlip.objects.all())
+    parking_slot = forms.ModelChoiceField(queryset=ParkingSlot.objects.all())
+    parking_lot = forms.ModelChoiceField(queryset=ParkingLot.objects.all(), disabled=True)
 
 
     def clean(self):

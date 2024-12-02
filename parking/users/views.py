@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate
 from django.utils import timezone
 from .forms import ReserveParkingForm
 from reservations.models import ParkingReservation, ParkingSlip
-from parking.models import ParkingSlot
+from parking.models import ParkingSlot, ParkingLot
 from customers.models import Customer
 
 
@@ -22,7 +22,7 @@ def register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             user = User.objects.create_user(username=username, password=password, email=email)
-            Customer.objects.create(user=user, vehicle_number='', registration_date=timezone.now(), is_regular_customer=False, contact_number='')
+            #Customer.objects.create(user=user, vehicle_number='', registration_date=timezone.now(), is_regular_customer=False, contact_number='')
             login(request, user)
             return redirect('login')
     
@@ -64,6 +64,7 @@ def reserve_parking(request):
         form = ReserveParkingForm(request.POST)
         if form.is_valid():
             parking_slot = form.cleaned_data['parking_slot']
+            parking_lot = form.cleaned_data['parking_lot']
             start_timestamp = form.cleaned_data['start_timestamp']
             duration_in_minutes = form.cleaned_data['duration_in_minutes']
             booking_date = form.cleaned_data['booking_date']
@@ -74,7 +75,8 @@ def reserve_parking(request):
                 start_timestamp=start_timestamp,
                 duration_in_minutes=duration_in_minutes,
                 booking_date=booking_date,
-                parking_slot=parking_slot
+                parking_slot=parking_slot,
+                parking_lot=parking_lot
             )
             slip_number = f"SLIP-{reservation.id}"
             ParkingSlip.objects.create(
