@@ -42,6 +42,6 @@ We welcome contributions to our app! If you're interested in contributing, pleas
 
 License
 
-Our app is licensed under the MIT License.
+Our app is licensed under the MIT License..
 
 We hope you enjoy using our Parking Reservation App!
