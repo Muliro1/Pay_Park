@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'customers',
     'reservations',
     'users',
+    'compressor',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,9 @@ AUTHENTICATION_BACKENDS = [
     #'users.authentication.CustomUserBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+COMPRESS_ROOT = BASE_DIR / 'static'
+
+COMPRESS_ENABLED = True
+
+STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
