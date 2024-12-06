@@ -1,16 +1,55 @@
-{% extends 'base.html' %}
-
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Reservation App - Find and Reserve Parking Spots Easily</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/placeholder.svg?height=400&width=800');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        .feature-icon {
+            font-size: 2rem;
+            color: #0d6efd;
+        }
+    </style>
+</head>
 <body>
-    <div class="container">
-        <p>Welcome, {{request.user.username}}!</p>
-        <a href="{% url 'logout' %}">Go To Your Protected Page!</a>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">ParkEase</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#benefits">Benefits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#signup">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <header class="hero py-5 mb-5">
         <div class="container text-center py-5">
             <h1 class="display-4 fw-bold mb-3">Parking Reservation App</h1>
             <p class="lead mb-4">Reserve your parking spot with ease. No more circling around the block!</p>
-            <a href="{% url 'reserve_parking' %}" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="#signup" class="btn btn-primary btn-lg">Get Started</a>
         </div>
     </header>
 
@@ -119,7 +158,13 @@
             </div>
         </section>
     </main>
-    
-</body>
 
-{% endblock %}
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2023 ParkEase. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
