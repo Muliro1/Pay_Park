@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <body>
     <div class="container">
         <p>Welcome, {{request.user.username}}!</p>
-        <a href="{% url 'logout' %}">Go To Your Protected Page!</a>
     </div>
     <header class="hero py-5 mb-5">
         <div class="container text-center py-5">
@@ -83,6 +83,7 @@
 
         <section id="benefits" class="mb-5">
             <h2 class="text-center mb-4">Benefits</h2>
+        
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="card h-100">
@@ -114,6 +115,7 @@
         <section id="signup" class="mb-5">
             <div class="text-center">
                 <h2 class="mb-4">Ready to Get Started?</h2>
+                
                 <p class="lead mb-4">Sign up now and start reserving parking spots with ease!</p>
                 <a href="#" class="btn btn-primary btn-lg">Sign Up Now</a>
             </div>
