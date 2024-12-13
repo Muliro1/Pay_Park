@@ -2,15 +2,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-5">
     <div class="col-md-6">
-        <h2 class="text-center">Reserve Parking</h2>
-        <form method="POST" action="{% url 'reserve_parking' %}" class="mt-4">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary btn-block">Reserve</button>
-            <a href="{% url 'home' %}" class="btn btn-secondary btn-block mt-2">Cancel</a>
-        </form>
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white text-center">
+                <h2>Reserve Parking</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{% url 'reserve_parking' %}" class="mt-4">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary btn-block">Reserve</button>
+                    <a href="{% url 'home' %}" class="btn btn-secondary btn-block mt-2">Cancel</a>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

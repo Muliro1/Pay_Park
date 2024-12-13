@@ -10,7 +10,7 @@
 
     <style>
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/placeholder.svg?height=400&width=800');
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{%static/images/placeholder.jpg?height=400&width=800');
             background-size: cover;
             background-position: center;
             color: white;
@@ -19,6 +19,17 @@
             font-size: 2rem;
             color: #0d6efd;
         }
+
+        .card {
+        border-radius: 10px;
+    }
+    .card-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .btn-block {
+        width: 100%;
+    }
     </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
