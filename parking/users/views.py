@@ -55,7 +55,7 @@ def logout_view(request):
     else:
         return redirect('home')
 
-@login_required
+
 def home_view(request):
     return render(request, 'users/home.html')
 @login_required

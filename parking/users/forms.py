@@ -12,6 +12,9 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields  = ['username', 'email', 'password', 'password_confirm']
+        help_texts = {
+            'username': None,
+        }
     
     def clean(self):
         cleaned_data = super().clean()
@@ -37,6 +40,9 @@ class LoginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+        help_texts = {
+            'username': None,
+        }
 
     def clean(self):
         cleaned_data = super().clean()

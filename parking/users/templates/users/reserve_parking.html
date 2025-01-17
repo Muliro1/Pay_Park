@@ -5,14 +5,14 @@
 <div class="row justify-content-center mt-5">
     <div class="col-md-6">
         <div class="card shadow-sm">
-            <div class="card-header bg-primary text-white text-center">
+            <div class="card-header bg-primary text-white text-center bg-success">
                 <h2>Reserve Parking</h2>
             </div>
             <div class="card-body">
                 <form method="POST" action="{% url 'reserve_parking' %}" class="mt-4">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary btn-block">Reserve</button>
+                    <button type="submit" class="btn btn-primary btn-block bg-success">Reserve</button>
                     <a href="{% url 'home' %}" class="btn btn-secondary btn-block mt-2">Cancel</a>
                 </form>
             </div>
