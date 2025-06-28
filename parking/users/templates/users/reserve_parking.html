@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="row justify-content-center mt-5">
     <div class="col-md-6">
         <div class="card shadow-sm">
@@ -12,8 +13,8 @@
                 <form method="POST" action="{% url 'reserve_parking' %}" class="mt-4">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit" class="btn btn-primary btn-block bg-success">Reserve</button>
-                    <a href="{% url 'home' %}" class="btn btn-secondary btn-block mt-2">Cancel</a>
+                    <button type="submit" class="btn btn-primary btn-block bg-success btn-small">Reserve</button>
+                    <a href="{% url 'home' %}" class="btn btn-secondary btn-block mt-2 btn-small">Cancel</a>
                 </form>
             </div>
         </div>
